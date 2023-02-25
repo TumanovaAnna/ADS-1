@@ -1,42 +1,43 @@
-// Copyright 2022 NNTU-CS
-#include <cmath>
-
+#include <cstdint>
+#include "alg.h"
 bool checkPrime(uint64_t value) {
-    for (int i = 2; i < int(sqrt(value)) + 1; i++) {
-    for (int i = 2; i < static_cast<int>(sqrt(value)) + 1; i++) {
-        if (value % i == 0) {
-            return false;
-        }
-    }
-    return true;
+  if (value <= 1)
+    return false;
+  for (int i = 2; i <= value/2; i++) {
+    if (value % i == 0)
+      return false;
+  }
+  return true;
 }
 uint64_t nPrime(uint64_t n) {
-    int tem = 1;
-    while (n > 0) {
-        tem++;
-        if (checkPrime(tem)) {
-            n--;
-        }
+  uint64_t num = 0;
+  uint64_t num1 = 0;
+  while (n > 0) {
+    if (checkPrime(num) == true) {
+      num1 = num;
+      --n;
     }
-    return tem;
+    ++num;
+  }
+  return num1;
 }
 uint64_t nextPrime(uint64_t value) {
-    int tem = value;
-    bool fl = false;
-    while (!fl) {
-        tmp++;
-        if (checkPrime(tem)) {
-            fl = true;
-        }
+  while (true) {
+    value++;
+    if (checkPrime(value)) {
+      return value;
     }
-    return tem;
+  }
 }
 uint64_t sumPrime(uint64_t hbound) {
-    uint64_t s = 0;
-    for (int i = 2; i < hbound; i++) {
-        if (checkPrime(i)) {
-            s += i;
-        }
+  uint64_t sum = 0;
+  uint64_t newhb;
+  newhb = hbound - 1;
+  while (newhb > 0) {
+    if (checkPrime(newhb) == true) {
+      sum += newhb;
     }
-    return sum;
+    --newhb;
+  }
+  return sum;
 }
