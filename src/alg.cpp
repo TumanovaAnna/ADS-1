@@ -1,21 +1,18 @@
 // Copyright 2022 NNTU-CS
 #include <cstdint>
 #include "alg.h"
-bool checkPrime(uint64_t value) {
+bool checkPrime(uint64_t value){
   if (value <= 1)
     return false;
-  for (int i=2; i*i<= value; i++) {
-    if (value % i == 0)
-      return false;
-  }
+  for (int i=2; i*i<= value; i++){
+    if (value%i==0) return false;}
   return true;
 }
 uint64_t nPrime(uint64_t n) {
   uint64_t num=0;
   uint64_t nomer=0;
   while (n > 0) {
-    
-    if (checkPrime(chislo)==1) {
+      if (checkPrime(chislo)==1) {
       nomer=num;
       --n;
     }
